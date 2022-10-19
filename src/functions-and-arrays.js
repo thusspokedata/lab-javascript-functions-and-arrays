@@ -10,7 +10,6 @@ function maxOfTwoNumbers(a, b) {
 // Iteration #2: Find longest word
 const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
 
-
 function findLongestWord(words) {
   let longestWord = '';
   if (words.length === 0) {
@@ -40,56 +39,43 @@ const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
 function sumNumbers(arr) {
   let total = 0;
-  if (arr?.length === 0) {
+  if (arr.length === 0) {
     return 0;
-  } else if (arr?.length === 1) {
+  } else if (arr.length === 1) {
     return arr[0];
   } else {
-    for (num of arr) {
-
+    for (let num of arr) {
       total += num;
     }
     return total;
   }
 }
 
+// #########################################################
+// ################# DONE ##################################
+// #########################################################
 // Iteration #3.1 Bonus:
-// function sum(arr) {
-//   let newArr = [];
-//   if (arr.length == 0) {
-//     return 0;
-//   } else if (arr.length === 1) {
-//     return String(arr[0]).length;
-//   } else {
-//     for (let i = 0; i < arr.length; i++) {
-//       newArr.push(String(arr[i]).length);
-//     }
-//   }
-//   return sumNumbers(newArr);
-// }
 
 function sum(arr) {
   let newArr = [];
-  if (arr.length == 0) {
+  if (arr.length === 0) {
     return 0;
-  } else if (arr.length == 1) {
-    if (typeof arr[0] === "number") {
-      newArr = arr;
-    } else {
-      newArr = arr[0].length;
-    }
+  } else if (arr.length === 1) {
+    typeof arr[0] === 'number' ? (newArr = arr) : (newArr = arr[0].length);
   } else {
     for (let i = 0; i < arr.length; i++) {
-      if (typeof arr[i] === "number") {
+      if (typeof arr[i] === 'number') {
         newArr.push(arr[i]);
-      } else if (typeof arr[i] === "boolean") {
-        newArr
+      } else if (typeof arr[i] === 'boolean') {
+        arr[i] === false ? newArr : newArr.push(1);
+      } else if (typeof arr[i] === 'object') {
+        throw new Error("Unsupported data type sir or ma'am");
       } else {
         newArr.push(String(arr[i]).length);
+      }
     }
   }
-  
-}return sumNumbers(newArr);
+  return sumNumbers(newArr);
 }
 
 // #########################################################
@@ -99,12 +85,11 @@ function sum(arr) {
 // Level 1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 
-function averageNumbers(num) {
-  if (num.length === 0) {
+function averageNumbers(arr) {
+  if (arr.length === 0) {
     return null;
   } else {
-    let subtotal = sumNumbers(num);
-    return subtotal / num.length;
+    return sum(arr) / arr.length;
   }
 }
 
@@ -128,21 +113,16 @@ function averageWordLength(words) {
   return averageNumbers(subtotal);
 }
 
+// #########################################################
+// ################# DONE ##################################
+// #########################################################
 // Bonus - Iteration #4.1
 function avg(arr) {
-  let newArr = [];
   if (arr.length === 0) {
     return null;
   } else {
-    for (el of arr) {
-      if (typeof el === Number) {
-        newArr.push(el);
-      } else {
-        newArr.push(el.length);
-      }
-    }
+    return +averageNumbers(arr).toFixed(2);
   }
-  return newArr;
 }
 
 // #########################################################
@@ -226,6 +206,9 @@ function howManyTimes(arr, word) {
   return count;
 }
 
+// #########################################################
+// ################# DONE ##################################
+// #########################################################
 // Iteration #8: Bonus
 const matrix = [
   [8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8],
@@ -250,7 +233,19 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
-function greatestProduct(arr) {}
+function greatestProduct(matrix) {
+  let result = 0;
+  let horizontal = 0;
+  let vertical = 0;
+  for (let j = 0; j < 20; j++) {
+    for (let i = 0; i < 17; i++) {
+      horizontal = matrix[j][i] * matrix[j][i + 1] * matrix[j][i + 2] * matrix[j][i + 3];
+      vertical = matrix[i][j] * matrix[i + 1][j] * matrix[i + 2][j] * matrix[i + 3][j];
+      result = Math.max(horizontal, vertical, result);
+    }
+  }
+  return result;
+}
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
